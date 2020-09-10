@@ -1,9 +1,11 @@
-# filename:  arcpy-create-points-insert-cursor.py
+# filename:  arcpy-create-points-insert-cursor.py (Python2)
 # purpose: read in a txtfile (csv) via Python I/O
-# and use the ArcPy module's Insert Cursor to put the data into a shapefile (.shp) 
+# and use the ArcPy module's Insert Cursor to put the data into a shapefile (.shp)
 
 # imports and set local vars
-import arcpy, sys, os.path
+import arcpy
+import sys
+import os.path
 from arcpy import env
 from arcpy import management as DM
 
@@ -24,7 +26,7 @@ if not arcpy.Exists(dir):
 sr = arcpy.Describe(r"F:\prog\marbles\samples.shp").spatialReference
 
 # Read in some sample pts from a csv
-inputFile = r"F:\prog\Marbles\samples.csv" 
+inputFile = r"F:\prog\Marbles\samples.csv"
 textin = open(inputFile, "r")
 
 # Create an empty Shapefile featureclass (fc)

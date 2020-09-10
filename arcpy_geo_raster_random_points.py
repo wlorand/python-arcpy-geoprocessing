@@ -1,9 +1,12 @@
-# filename: arcpy-geo-raster-random-points.py
-# purpose: Create 100 random points within the extent of an elevation raster 
-#          and then write out a text file of point coordinates (x,y) 
+# filename: arcpy-geo-raster-random-points.py (Python2)
+# purpose: Create 100 random points within the extent of an elevation raster
+#          and then write out a text file of point coordinates (x,y)
 
 # Imports
-import arcpy, sys, os.path, random
+import arcpy
+import sys
+import os.path
+import random
 from arcpy import env
 
 # Set file and workspace settings
@@ -31,9 +34,9 @@ yRange = ext.YMax - ext.YMin
 # oneRandY = yRange * random.random() + ext.YMin
 # print oneRandY
 
-# Create some empty lists for X and Y and populate them with 100 random values in the extent of the raster 
+# Create some empty lists for X and Y and populate them with 100 random values in the extent of the raster
 randXList = []
-randYList = [] 
+randYList = []
 for i in range(0, 100):
     randXValue = xRange * random.random() + ext.XMin
     randXList.append(int(randXValue))
@@ -47,8 +50,7 @@ print randYList
 # todo: enhance by deleting the file if it already exists (not coded here)
 pointfilepath = datadir + "\\randpts.txt"
 out_randpts = open(pointfilepath, "w")
-out_randpts.write("X Y \n") # header line
+out_randpts.write("X Y \n")  # header line
 for i in range(len(randXList)):
-    out_randpts.write( str(randXList[i]) + " " + str(randYList[i]) + "\n")
+    out_randpts.write(str(randXList[i]) + " " + str(randYList[i]) + "\n")
 out_randpts.close()
-
