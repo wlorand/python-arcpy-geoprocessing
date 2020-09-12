@@ -1,9 +1,9 @@
-# filename:  arcpy-create-points-insert-cursor.py (Python2)
+# filename:  arcpy_create_points.py (Python2)
 # purpose: read in a txtfile (csv) via Python I/O
 # and use the ArcPy module's Insert Cursor to put the data into a shapefile (.shp)
 
 # imports and set local vars
-import arcpy
+import arcpy  # pip install arcpy ?
 import sys
 import os.path
 from arcpy import env
@@ -27,7 +27,7 @@ sr = arcpy.Describe(r"F:\prog\marbles\samples.shp").spatialReference
 
 # Read in some sample pts from a csv
 inputFile = r"F:\prog\Marbles\samples.csv"
-textin = open(inputFile, "r")
+textin = open(inputFile, "r")  # TODO: use context manager for auto close
 
 # Create an empty Shapefile featureclass (fc)
 ptfeatures = DM.CreateFeatureclass(dir, ptfeatname, "POINT", "", "", "", sr)
@@ -47,7 +47,7 @@ for txtrow in textin:
         ptobj = arcpy.Point(float(values[2]), float(values[3]))
         ptfeat.shape = ptobj
         # populate the other fields
-        ptfeat.SAMPLES_ID = int(float(values[0]))
+        ptfeat.SAMPLES_ID = int(values[0])
         ptfeat.CATOT = float(values[1])
         # actually insert the row
         cur.insertRow(ptfeat)
@@ -58,4 +58,4 @@ DM.AddXY(ptfeatures)
 
 # del objects and close text files for garbage collection
 textin.close()
-del cur, sr, ptfeat
+del cur, sr, ptfeat  # py code should not need to do this
